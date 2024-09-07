@@ -116,7 +116,7 @@ func addMongoConditionFilter(condArr bson.A, jm *JsonMap, fm *FieldsMap) bson.A 
 		if v.ValuesToExactMatch != nil {
 			if isDateTimeFieldKey(k, fm.DateTimeFieldKeys) {
 				for _, value := range v.ValuesToExactMatch {
-					value = parseDateTimeOrReturn(&value)
+					value = parseDateTimeOrReturn(value)
 				}
 			}
 			condition = bson.D{{fm.ConditionFields[k], bson.D{{"$in", v.ValuesToExactMatch}}}}
@@ -125,7 +125,7 @@ func addMongoConditionFilter(condArr bson.A, jm *JsonMap, fm *FieldsMap) bson.A 
 		}
 		if v.GreaterOrEqual != nil {
 
-			v.GreaterOrEqual = treatDateTime(k, fm.DateTimeFieldKeys, &v.GreaterOrEqual)
+			v.GreaterOrEqual = treatDateTime(k, fm.DateTimeFieldKeys, v.GreaterOrEqual)
 
 			condition = bson.D{{fm.ConditionFields[k], bson.D{{"$gte", v.GreaterOrEqual}}}}
 
@@ -133,7 +133,7 @@ func addMongoConditionFilter(condArr bson.A, jm *JsonMap, fm *FieldsMap) bson.A 
 		}
 		if v.GreaterThan != nil {
 
-			v.GreaterThan = treatDateTime(k, fm.DateTimeFieldKeys, &v.GreaterThan)
+			v.GreaterThan = treatDateTime(k, fm.DateTimeFieldKeys, v.GreaterThan)
 
 			condition = bson.D{{fm.ConditionFields[k], bson.D{{"$gt", v.GreaterThan}}}}
 
@@ -141,7 +141,7 @@ func addMongoConditionFilter(condArr bson.A, jm *JsonMap, fm *FieldsMap) bson.A 
 		}
 		if v.LowerOrEqual != nil {
 
-			v.LowerOrEqual = treatDateTime(k, fm.DateTimeFieldKeys, &v.LowerOrEqual)
+			v.LowerOrEqual = treatDateTime(k, fm.DateTimeFieldKeys, v.LowerOrEqual)
 
 			condition = bson.D{{fm.ConditionFields[k], bson.D{{"$lte", v.LowerOrEqual}}}}
 
@@ -149,7 +149,7 @@ func addMongoConditionFilter(condArr bson.A, jm *JsonMap, fm *FieldsMap) bson.A 
 		}
 		if v.LowerThan != nil {
 
-			v.LowerThan = treatDateTime(k, fm.DateTimeFieldKeys, &v.LowerThan)
+			v.LowerThan = treatDateTime(k, fm.DateTimeFieldKeys, v.LowerThan)
 
 			condition = bson.D{{fm.ConditionFields[k], bson.D{{"$lt", v.LowerThan}}}}
 
@@ -158,7 +158,7 @@ func addMongoConditionFilter(condArr bson.A, jm *JsonMap, fm *FieldsMap) bson.A 
 		if v.ValuesToExclude != nil {
 			if isDateTimeFieldKey(k, fm.DateTimeFieldKeys) {
 				for _, item := range v.ValuesToExclude {
-					item = parseDateTimeOrReturn(&item)
+					item = parseDateTimeOrReturn(item)
 				}
 			}
 

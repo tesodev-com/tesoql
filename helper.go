@@ -4,15 +4,15 @@ import (
 	"time"
 )
 
-func treatDateTime(k string, dateFields map[string]string, val *interface{}) *interface{} {
+func treatDateTime(k string, dateFields map[string]string, val interface{}) interface{} {
 	if isDateTimeFieldKey(k, dateFields) {
 		val = parseDateTimeOrReturn(val)
 	}
 	return val
 }
 
-func parseDateTimeOrReturn(val *interface{}) *interface{} {
-	strVal, ok := (*val).(string)
+func parseDateTimeOrReturn(val interface{}) interface{} {
+	strVal, ok := (val).(string)
 	if ok {
 		dateFilter, err := time.Parse(time.RFC3339, strVal)
 		if err == nil {

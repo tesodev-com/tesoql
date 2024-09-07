@@ -32,14 +32,14 @@ func newTesoQlService(repo *iTesoQlRepo, toggles *ToggleConfig) *Service {
 //
 // Returns:
 //
-// - []map[string]any: The data retrieved from the repository.
+// - []map[string]interface{}: The data retrieved from the repository.
 //
 // - int: The total count of records that match the query.
 //
 // - int: The size of the current page of results.
 //
 // - *ErrorResponseDTO: An error response, if any occurred during validation or retrieval.
-func (s *Service) Get(jsonMap *JsonMap) ([]map[string]any, int, int, *ErrorResponseDTO) {
+func (s *Service) Get(jsonMap *JsonMap) ([]map[string]interface{}, int, int, *ErrorResponseDTO) {
 	validationErr := validateToggles(jsonMap, s.toggles)
 	if validationErr != nil {
 		return nil, 0, 0, validationErr
